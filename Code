@@ -1,0 +1,57 @@
+def find max_subarray (alist, start, end) : 
+    if start=-end-1:
+      return start, end, alist[start] 
+    else:
+      mid=(start+end) //2
+       left_start,left_end, left_max=find_max_subarray (alist,start,mid) 
+       right_start, right_end, right_max=find_max_subarray (alist,mid, end) 
+       cross_start, cross_end, cross_max=find_max_crossing_subarray (alist, start,mid, end) 
+    if (left_max>right_max and left_max>cross max):
+  return left_start, left_end, left_max 
+    elif (right_max>left_max and right_max>cross_max):
+  return right_start, right_end, right_max 
+    else:
+  return cross_start, cross end, cross_max
+def find_max_crossing_subarray (alist, start,mid, end) :
+     sum left=float('-inf')
+     sum_temp=0 cross_start=mid
+   for i in range (mid-1, start-1,-1):
+     sum_temp=sum_temp+alist[i]
+   if (sum temp>sum left):
+     sum_left=sum_temp
+     cross_start=i
+     sum_right=float('-inf') 
+     sum_temp=0 
+     cross_end=mid+1
+   for i in range (mid, end) :
+     sum_temp=sum temp+alist[i] 
+   if sum_temp>sum_right:
+     sum_right=sum_temp
+     cross end=i+1
+return cross_start, cross_end, sum_left+sum_right
+     alist=input("Enter the list of numbers: ") 
+     alist=alist.split()
+     alist=[int (x) for x in alist]
+     start, end, maximum=find_max_subarray (alist,0,len (alist)) 
+print ("The maximum subarray starts at index 0, ends at index () and has sum (). ".format(start, end-1, maximum))
+
+
+
+
+Time complexity:
+
+T(n) = 1 + T(n //2)
+     = 1 +1 +T(n//4) 
+     = 2 +T(n//4) 
+     = 3 + T(n//8) 
+     = 4 + T(n//16) 
+     =k+T(n//24) 
+     = {n//2k = 0 k = log(n) + 1} 
+     = log(n) + 1 +T(0)
+     = O(log(n))
+     
+     
+Actual Time:
+
+For n=1/100000
+time(ns)= 0,53
